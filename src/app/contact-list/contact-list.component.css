@@ -1,0 +1,31 @@
+.myClass {
+    background-color: rgb(230, 132, 149);
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+   
+}.friendContact {
+    background-color: rgb(66, 228, 74);
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    }
+    .familyContact {
+    background-color: rgb(147, 224, 52);
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    }
+    .workContact {
+    background-color: rgb(186, 236, 35);
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    }button[type="submit"] {
+        background-color: #007bff; /* Couleur de fond du bouton */
+        color: #fff; /* Couleur du texte */
+        padding: 10px 20px; /* Espacement intérieur du bouton */
+        border: none; /* Supprimer la bordure */
+        cursor: pointer; /* Curseur de la souris au survol */
+    }
+    
+    
+    
+    
+    

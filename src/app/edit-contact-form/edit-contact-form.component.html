@@ -1,0 +1,103 @@
+<h2 mat-dialog-title>Modifier le contact</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="editContactForm" (ngSubmit)="onSubmit()">
+    <br>
+    <div >
+      <div >
+        <mat-form-field appearance="outline">
+          <mat-label>Prénom</mat-label>
+          <input
+            matInput
+            formControlName="firstName"
+            placeholder="Sarah"
+            required
+          />
+          <mat-error>
+            {{ "Ecrivez votre Prénom" }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div >
+        <mat-form-field appearance="outline">
+          <mat-label>Nom</mat-label>
+          <input
+            matInput
+            formControlName="lastName"
+            placeholder="Hamami"
+            required
+          />
+          <mat-error> {{ "Ecrivez votre Nom" }} </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div >
+        <mat-form-field appearance="outline">
+          <mat-label>Téléphone</mat-label>
+          <input
+            matInput
+            formControlName="phone"
+            placeholder="98000000"
+            required
+          />
+          <mat-error> {{ "Ecrivez votre Téléphone" }} </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div >
+        <mat-form-field appearance="outline">
+          <mat-label>Email (Optional)</mat-label>
+          <input
+            matInput
+            formControlName="email"
+            placeholder="you@example.com"
+          />
+          <!-- <mat-error> {{ "Ecrivez votre Email" }} </mat-error> -->
+        </mat-form-field>
+      </div>
+
+      <div >
+        <mat-form-field appearance="outline">
+          <mat-label>Description</mat-label>
+          <input
+            matInput
+            formControlName="description"
+            placeholder="My daughter"
+          />
+          <mat-error> {{ "Ecrivez votre description" }} </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div >
+        <mat-form-field appearance="outline">
+          <mat-label>Choisir un type</mat-label>
+          <mat-select formControlName="type" required>
+            <mat-option value="Friend">Ami</mat-option>
+            <mat-option value="Work">Travail</mat-option>
+            <mat-option value="Family">Famille</mat-option>
+          </mat-select>
+          <mat-error> {{ "Choisir votre Type" }} </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions class="mat-dialog-actions-right">
+  <button
+    type="submit"
+    class="btn btn-primary"
+    [disabled]="!editContactForm.valid" (click)="addedSucc()"
+  >
+    Modifier
+  </button>
+  <button
+    type="button"
+    mat-dialog-close
+    class="btn btn-secondary"
+    style="margin-left: 10px"
+  >
+    Annuler
+  </button>
+</mat-dialog-actions>

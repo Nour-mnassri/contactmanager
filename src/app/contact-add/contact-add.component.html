@@ -1,0 +1,163 @@
+<main>
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <h1 class="text-center" style="font-weight: bold">
+        Ajout d'un nouveau contact
+      </h1>
+      <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+        <div class="row g-3">
+          <button
+          mat-button color="accent"
+          type="submit"
+          style="font-size: 25px;"
+        
+          [disabled]="!contactForm.valid"
+        >
+        <mat-icon>add_box</mat-icon> Ajouter
+        </button>
+          <div class="col-sm-6">
+            <label for="firstName" class="form-label">Prénom</label>
+            <input
+              type="text"
+              class="form-control"
+              id="firstName"
+              placeholder="Donner votre prénom"
+              formControlName="firstName"
+              
+              [ngClass]="{
+                'is-invalid':
+                  contactForm.get('firstName')?.invalid &&
+                  (contactForm.get('firstName')?.dirty ||
+                    contactForm.get('firstName')?.touched),
+                'is-valid':
+                  contactForm.get('firstName')?.valid &&
+                  (contactForm.get('firstName')?.dirty ||
+                    contactForm.get('firstName')?.touched)
+              }"
+              required
+            />
+            
+            <div *ngIf="contactForm.get('firstName')?.hasError('required') && contactForm.get('firstName')?.dirty" class="alert alert-danger">
+              Le champ prénom est requis
+            </div>
+          </div>
+          
+         
+          <div class="col-sm-6">
+            <label for="lastName" class="form-label">Nom :</label>
+            <input
+              type="text"
+              class="form-control"
+              id="lastName"
+              placeholder="Donner votre nom"
+              formControlName="lastName"
+              [ngClass]="{
+                'is-invalid':
+                  contactForm.get('lastName')?.invalid &&
+                  (contactForm.get('lastName')?.dirty ||
+                    contactForm.get('lastName')?.touched),
+                'is-valid':
+                  contactForm.get('lastName')?.valid &&
+                  (contactForm.get('lastName')?.dirty ||
+                    contactForm.get('lastName')?.touched)
+              }"
+              required
+            />
+            <div *ngIf="contactForm.get('lastName')?.hasError('required') && contactForm.get('lastName')?.dirty" class="alert alert-danger">
+              Le champ nom est requis
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <label for="phone" class="form-label">Téléphone :</label>
+            <input
+              type="text"
+              class="form-control"
+              id="phone"
+              placeholder="Donner votre téléphone"
+              formControlName="phone"
+              [ngClass]="{
+                'is-invalid':
+                  contactForm.get('phone')?.invalid &&
+                  (contactForm.get('phone')?.dirty ||
+                    contactForm.get('phone')?.touched),
+                'is-valid':
+                  contactForm.get('phone')?.valid &&
+                  (contactForm.get('phone')?.dirty ||
+                    contactForm.get('phone')?.touched)
+              }"
+              required
+            />
+            <div *ngIf="contactForm.get('phone')?.hasError('required') && contactForm.get('phone')?.dirty" class="alert alert-danger">
+              Le champ téléphone est requis
+            </div>
+          </div>
+          <div class="col-6">
+            <label for="email" class="form-label"
+              >Email <span class="text-muted">(Optional)</span></label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="email"
+              placeholder="Donner votre email"
+              formControlName="email"
+            
+              
+            />
+          
+          </div>
+          <div class="col-6">
+            <label for="description" class="form-label">Description</label>
+            <input
+              type="text"
+              class="form-control"
+              id="description"
+              placeholder="Donner votre description"
+              formControlName="description"
+              [ngClass]="{
+                'is-invalid':
+                  contactForm.get('description')?.invalid &&
+                  (contactForm.get('description')?.dirty ||
+                    contactForm.get('description')?.touched),
+                'is-valid':
+                  contactForm.get('description')?.valid &&
+                  (contactForm.get('description')?.dirty ||
+                    contactForm.get('description')?.touched)
+              }"
+              required
+            />
+            <div *ngIf="contactForm.get('description')?.hasError('required') && contactForm.get('description')?.dirty" class="alert alert-danger">
+              Le champ description est requis
+            </div>
+          </div>
+          <div class="col-md-5">
+            <label for="country" class="form-label">Type</label>
+            <select
+              class="form-select"
+              id="country"
+              formControlName="type"
+              [ngClass]="{
+                'is-invalid':
+                  contactForm.get('country')?.invalid &&
+                  (contactForm.get('country')?.dirty ||
+                    contactForm.get('country')?.touched),
+                'is-valid':
+                  contactForm.get('country')?.valid &&
+                  (contactForm.get('country')?.dirty ||
+                    contactForm.get('country')?.touched)
+              }"
+              required
+            >
+              <option value="">Choisir un type</option>
+              <option value="Friend">Ami</option>
+              <option value="Work">Travail</option>
+              <option value="Family">Famille</option>
+            </select>
+          </div>
+          <hr class="my-4" />
+         
+        </div>
+      </form>
+    </div>
+  </div>
+</main>

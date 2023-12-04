@@ -1,0 +1,18 @@
+<header>
+    <div *ngIf="isConnected" class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
+      <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+        <a class="me-3 py-2 text-dark text-decoration-none" href="#"routerLink="/app-animation" routerLinkActive="active">
+          <img  [alt]="imgAltText"class="header-image" />{{ getUser().toUpperCase() }}</a>       
+        <a class="me-3 py-2 text-dark text-decoration-none" routerLink="/contact-add" routerLinkActive="active">Ajouter</a>
+        <a class="me-3 py-2 text-dark text-decoration-none" routerLink="/contact-list" routerLinkActive="active">Liste des contacts</a>
+      </nav>
+    </div>
+  
+    <div *ngIf="!isConnected" class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
+      <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+        <a class="me-3 py-2 text-dark text-decoration-none" routerLink="/login" routerLinkActive="active">Se connecter</a>
+        <a class="me-3 py-2 text-dark text-decoration-none" routerLink="/signup" routerLinkActive="active">Créer un compte</a>
+        <a class="me-3 py-2 text-dark text-decoration-none" routerLink="/contact-us" routerLinkActive="active">Contactez nous</a>
+      </nav>
+    </div>
+  </header>
