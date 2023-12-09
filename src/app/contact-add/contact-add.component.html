@@ -1,19 +1,18 @@
-<main>
+<main class="container mt-4">
   <div class="row">
     <div class="col-md-8 mx-auto">
-      <h1 class="text-center" style="font-weight: bold">
-        Ajout d'un nouveau contact
-      </h1>
+      <h1 class="text-center" style="font-weight: bold">Ajout d'un nouveau contact</h1>
       <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
         <div class="row g-3">
           <button
-          mat-button color="accent"
-          type="submit"
-          style="font-size: 25px;"
-        
+          mat-button
+          color="accent"
+          type="button"
+          style="font-size: 25px"
+          (click)="createContact()"
           [disabled]="!contactForm.valid"
         >
-        <mat-icon>add_box</mat-icon> Ajouter
+          <mat-icon>add_box</mat-icon> Ajouter
         </button>
           <div class="col-sm-6">
             <label for="firstName" class="form-label">Prénom</label>
@@ -23,7 +22,6 @@
               id="firstName"
               placeholder="Donner votre prénom"
               formControlName="firstName"
-              
               [ngClass]="{
                 'is-invalid':
                   contactForm.get('firstName')?.invalid &&
@@ -36,13 +34,18 @@
               }"
               required
             />
-            
-            <div *ngIf="contactForm.get('firstName')?.hasError('required') && contactForm.get('firstName')?.dirty" class="alert alert-danger">
+
+            <div
+              *ngIf="
+                contactForm.get('firstName')?.hasError('required') &&
+                contactForm.get('firstName')?.dirty
+              "
+              class="alert alert-danger"
+            >
               Le champ prénom est requis
             </div>
           </div>
-          
-         
+
           <div class="col-sm-6">
             <label for="lastName" class="form-label">Nom :</label>
             <input
@@ -63,7 +66,13 @@
               }"
               required
             />
-            <div *ngIf="contactForm.get('lastName')?.hasError('required') && contactForm.get('lastName')?.dirty" class="alert alert-danger">
+            <div
+              *ngIf="
+                contactForm.get('lastName')?.hasError('required') &&
+                contactForm.get('lastName')?.dirty
+              "
+              class="alert alert-danger"
+            >
               Le champ nom est requis
             </div>
           </div>
@@ -87,7 +96,13 @@
               }"
               required
             />
-            <div *ngIf="contactForm.get('phone')?.hasError('required') && contactForm.get('phone')?.dirty" class="alert alert-danger">
+            <div
+              *ngIf="
+                contactForm.get('phone')?.hasError('required') &&
+                contactForm.get('phone')?.dirty
+              "
+              class="alert alert-danger"
+            >
               Le champ téléphone est requis
             </div>
           </div>
@@ -101,10 +116,7 @@
               id="email"
               placeholder="Donner votre email"
               formControlName="email"
-            
-              
             />
-          
           </div>
           <div class="col-6">
             <label for="description" class="form-label">Description</label>
@@ -126,25 +138,31 @@
               }"
               required
             />
-            <div *ngIf="contactForm.get('description')?.hasError('required') && contactForm.get('description')?.dirty" class="alert alert-danger">
+            <div
+              *ngIf="
+                contactForm.get('description')?.hasError('required') &&
+                contactForm.get('description')?.dirty
+              "
+              class="alert alert-danger"
+            >
               Le champ description est requis
             </div>
           </div>
           <div class="col-md-5">
-            <label for="country" class="form-label">Type</label>
+            <label for="type" class="form-label">Type</label>
             <select
               class="form-select"
-              id="country"
+              id="type"
               formControlName="type"
               [ngClass]="{
                 'is-invalid':
-                  contactForm.get('country')?.invalid &&
-                  (contactForm.get('country')?.dirty ||
-                    contactForm.get('country')?.touched),
+                  contactForm.get('type')?.invalid &&
+                  (contactForm.get('type')?.dirty ||
+                    contactForm.get('type')?.touched),
                 'is-valid':
-                  contactForm.get('country')?.valid &&
-                  (contactForm.get('country')?.dirty ||
-                    contactForm.get('country')?.touched)
+                  contactForm.get('type')?.valid &&
+                  (contactForm.get('type')?.dirty ||
+                    contactForm.get('type')?.touched)
               }"
               required
             >
@@ -155,9 +173,33 @@
             </select>
           </div>
           <hr class="my-4" />
-         
         </div>
+        <hr class="my-4">
       </form>
+
+      <!-- Table -->
+      <div class="row row-cols-1 mb-1 text-center">
+        <table class="table table-bordered">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">Nom</th>
+              <th scope="col">Prénom</th>
+              <th scope="col">Email</th>
+              <th scope="col">Description</th>
+              <th scope="col">Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of listContacts; let i = index">
+              <td>{{ item.lastName }}</td>
+              <td>{{ item.firstName }}</td>
+              <td>{{ item.email }}</td>
+              <td>{{ item.description }}</td>
+              <td>{{ item.type }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </main>

@@ -2,6 +2,8 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { ContactService } from '../services/contact.service';
+import { Contact } from '../models/contact';
 
 @Component({
   selector: 'app-edit-contact-form',
@@ -14,14 +16,16 @@ export class EditContactFormComponent {
   constructor(
     private dialogRef: MatDialogRef<EditContactFormComponent>,
     private fb: FormBuilder,
+    private contactService: ContactService, // Inject the ContactService
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.editContactForm = this.fb.group({
-      firstName: [data.firstName, Validators.required],
-      lastName: [data.lastName, Validators.required],
-      phone: [data.phone, Validators.required],
-      email: [data.email],
-      description: [data.description,Validators.required],
+      id: [data.id],
+      firstName: [data.firstName, [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
+      lastName: [data.lastName, [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
+      phone: [data.phone, [Validators.required, Validators.pattern(/^\d+$/)]],
+      email: [data.email, Validators.email],
+      description: [data.description, [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
       type: [data.type, Validators.required],
     });
   }
@@ -30,13 +34,23 @@ export class EditContactFormComponent {
     Swal.fire('Contact modifié avec succès!', '', 'success');
     this.dialogRef.close();
   }
+
   onSubmit(): void {
     if (this.editContactForm.valid) {
-      this.dialogRef.close(this.editContactForm.value);
+    
+  
+      this.contactService.updateContact(this.editContactForm.value);
+      this.addedSucc();
+      this.dialogRef.close(this.editContactForm.value); // Close the dialog with the updated contact
     }
   }
+  
+  
 
   onCancel(): void {
+    console.log('Cancel button clicked');
     this.dialogRef.close();
   }
 }
+
+

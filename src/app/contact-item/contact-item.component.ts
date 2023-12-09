@@ -1,10 +1,9 @@
-import { Component,Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Contact } from '../models/contact';
-import { Output, EventEmitter } from '@angular/core';
 import Swal from 'sweetalert2';
 import { EditContactFormComponent } from '../edit-contact-form/edit-contact-form.component';
 import { MatDialog } from '@angular/material/dialog';
-
+import { ContactService } from '../services/contact.service';
 
 @Component({
   selector: 'app-contact-item',
@@ -12,15 +11,16 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./contact-item.component.css']
 })
 export class ContactItemComponent implements OnInit { 
-@Input() contact!: Contact;
-@Input() i: number = 0;
-@Output() deleteEvent= new EventEmitter<number>();
+  @Input() contact!: Contact;
+  @Input() i: number = 0;
+  @Output() deleteEvent = new EventEmitter<number>();
+  @Output() updateEvent = new EventEmitter<Contact>();
 
+  constructor(private dialog: MatDialog, private contactService: ContactService) { }
 
-constructor(private dialog: MatDialog) { 
- }
   ngOnInit(): void {
   }
+
   deleteContact(): void {
     Swal.fire({
       title: 'Confirmation',
@@ -41,20 +41,18 @@ constructor(private dialog: MatDialog) {
     });
   }
 
-
   editContact(): void {
     const dialogRef = this.dialog.open(EditContactFormComponent, {
       width: '400px',
-      data: {},
-      disableClose: true
+      data: { ...this.contact },
+      disableClose: true,
     });
   
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        Swal.fire('Contact modifié avec succès!', '', 'success');
+    dialogRef.afterClosed().subscribe((updatedContact: Contact) => {
+      if (updatedContact) {
+        this.updateEvent.emit(updatedContact); 
       }
     });
   }
   
-
 }

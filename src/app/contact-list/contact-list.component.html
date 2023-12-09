@@ -1,39 +1,12 @@
 <main>
-    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-        <div class="col" *ngFor="let item of listContacts; let i=index">
-            <app-contact-item [contact]='item' [i]="i" (deleteEvent)="deleteContact($event)"></app-contact-item>
-        </div>
+  <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+    <div class="col" *ngFor="let item of listContacts; let i=index">
+      <app-contact-item
+        [contact]="item"
+        [i]="i"
+        (deleteEvent)="deleteContact($event)"
+        (updateEvent)="updateContact($event)"
+      ></app-contact-item>
     </div>
+  </div>
 </main>
-<!-- <main><form action="/votre-page-de-recherche" method="get">
-    <input type="text" name="q" placeholder="Rechercher..." />
-    <button type="submit">Rechercher</button>
-
-
-</form>
-    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-        <div class="col" *ngFor="let contact of listContacts; let i=index">
-            <div class="card mb-4 rounded-3 shadow-sm">
-                <div class="card-header py-3">
-                    <h4 class="text-shadow" [ngClass]="{'friendContact': contact.type === 'Friend','workContact': contact.type === 'Work','familyContact': contact.type === 'Family'}">Contact {{i+1}}</h4>
-                </div>
-                <div class="card-body"[ngClass]="{'friendContact': contact.type === 'Friend','workContact': contact.type === 'Work','familyContact': contact.type === 'Family'}">
-                    <h1 class="card-title">{{contact.firstName}}{{contact.lastName}}</h1>
-                    <ul [ngSwitch]="contact.description" class="list-unstyled mt-3 mb-4">
-                        <li>Phone : {{contact.phone}}</li>
-                        <li>Email : {{contact.email}}</li>
-                        <li>Description : {{contact.description}}</li> 
-                    </ul>
-                    <div class="mat-card-actions">
-                        <button (click)="editContact()" type="button" class="btn btn-primary">
-                            Editer
-                        </button>
-                        <button (click)='deleteContact()' type="button" class="btn btn-danger">
-                            Supprimer
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</main> -->
